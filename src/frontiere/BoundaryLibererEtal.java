@@ -19,6 +19,8 @@ public class BoundaryLibererEtal {
 			if (donneesEtal[0].equals("true")) {
 				System.out.println("Vous avez vendu " + donneesEtal[4] + " " + donneesEtal[2] + " sur " + donneesEtal[3]);
 				System.out.println("Au revoir " + nomVendeur + ", passez une bonne journée !");
+			} else {
+				System.out.println("Mais vous ne faîtes pas partie du marché !");
 			}
 		}
 	}

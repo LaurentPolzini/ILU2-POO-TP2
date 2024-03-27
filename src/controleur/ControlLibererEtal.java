@@ -28,7 +28,11 @@ public class ControlLibererEtal {
 	 *         quantité de produit vendu
 	 */
 	public String[] libererEtal(String nomVendeur) {
-		return this.getEtal(nomVendeur).etatEtal();
+		String[] etatEtal = this.getEtal(nomVendeur).etatEtal();
+		
+		this.getEtal(nomVendeur).libererEtal();
+		
+		return etatEtal;
 	}
 
 }

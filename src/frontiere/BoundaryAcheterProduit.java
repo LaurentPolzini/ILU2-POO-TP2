@@ -34,11 +34,17 @@ public class BoundaryAcheterProduit {
 			boolean isVendeurInList = false;	
 			do {
 				nomVendeur = scan.next();
-				for (Gaulois nomGaulois: gaulioVendantProd) { // cherche que le nom entré soit bien un vendeur du produit
+				for (Gaulois nomGaulois: gaulioVendantProd) { // cherche que le nom entré soit bien un vendeur du produit; ou le numéro affiché
 					if (nomGaulois.getNom().equals(nomVendeur)) {
 						isVendeurInList = true;
 					}
 				}
+				/*
+				 * if (!isVendeurInList && (Integer.parseInt(nomVendeur) - 1 <
+				 * gaulioVendantProd.length) && (Integer.parseInt(nomVendeur) - 1 >= 0) &&
+				 * gaulioVendantProd[Integer.parseInt(nomVendeur) -
+				 * 1].getNom().equals(nomVendeur)) { isVendeurInList = true; }
+				 */
 				if (!isVendeurInList) {
 					System.out.println(nomVendeur + " ne vend pas de " + produit + " !");
 					System.out.println("Chez qui voulez vous achetez " + produit + " ?");
@@ -47,21 +53,27 @@ public class BoundaryAcheterProduit {
 			
 			System.out.println(nomAcheteur + " se déplace jusqu'à l'étal de " + nomVendeur);
 			System.out.println(nomVendeur + ": Bonjour " + nomAcheteur + " !");
-			int nbProdVoulu = Clavier.entrerEntier("Combien de " + produit + " veux-tu donc ?");
-			int nbProdReel = this.controlAcheterProduit.acheterProduit(nbProdVoulu, this.controlAcheterProduit.trouverHabitant(nomVendeur));
-			if (nbProdReel == 0) {
-				System.out.println("Désolé, je n'ai plus du tout de " + produit + "...");
-			}
-			if (nbProdReel < nbProdVoulu) {
-				System.out.println("Désolé " + nomAcheteur + ", il ne me reste plus que " + nbProdReel + " " + produit);
-				System.out.println(nomAcheteur + " finit le stock de " + produit + " " + nomVendeur);
-			}
-			else {
-				System.out.println(nomAcheteur + " achète " + nbProdReel + " " + produit + " à " + nomVendeur);
-			}
 			
-			System.out.println("Très bonne journée à toi " + nomAcheteur + " !");
+			acheteEffectivement(nomVendeur, produit, nomAcheteur);
 		}
 		
+	}
+
+	private void acheteEffectivement(String nomVendeur, String produit, String nomAcheteur) {
+		int nbProdVoulu = Clavier.entrerEntier("Combien de " + produit + " veux-tu donc ?");
+		int nbProdReel = this.controlAcheterProduit.acheterProduit(nbProdVoulu, this.controlAcheterProduit.trouverHabitant(nomVendeur));
+		
+		if (nbProdReel == 0) {
+			System.out.println("Désolé, je n'ai plus du tout de " + produit + "...");
+		}
+		if (nbProdReel < nbProdVoulu) {
+			System.out.println("Désolé " + nomAcheteur + ", il ne me reste plus que " + nbProdReel + " " + produit);
+			System.out.println(nomAcheteur + " finit le stock de " + produit + " " + nomVendeur);
+		}
+		else {
+			System.out.println(nomAcheteur + " achète " + nbProdReel + " " + produit + " à " + nomVendeur);
+		}
+		
+		System.out.println("Très bonne journée à toi " + nomAcheteur + " !");
 	}
 }

@@ -17,12 +17,16 @@ public class BoundaryPrendreEtal {
 		if (!isVendeurVerifie) {
 			System.out.println("Je suis désolé " + nomVendeur + " mais il faut être un habitant de notre village pour commercer ici.");
 		} else {
-			System.out.println("Bonjour " + nomVendeur + " je vais regarder si je peux vous trouver un étal.");
-			boolean isEtalDispo = this.controlPrendreEtal.resteEtals();
-			if (!isEtalDispo) {
-				System.out.println("Désolé " + nomVendeur + " je n'ai plus d'étal qui ne soit pas déjà occupé");
+			if (this.controlPrendreEtal.isVendeur(nomVendeur) && this.controlPrendreEtal.isOccupe(nomVendeur)) {
+				System.out.println("Vous êtes déjà un vendeur !");
 			} else {
-				this.installerVendeur(nomVendeur);
+				System.out.println("Bonjour " + nomVendeur + " je vais regarder si je peux vous trouver un étal.");
+				boolean isEtalDispo = this.controlPrendreEtal.resteEtals();
+				if (!isEtalDispo) {
+					System.out.println("Désolé " + nomVendeur + " je n'ai plus d'étal qui ne soit pas déjà occupé");
+				} else {
+					this.installerVendeur(nomVendeur);
+				}
 			}
 		}
 	}
